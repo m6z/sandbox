@@ -17,9 +17,14 @@ build_script:
   cmd: |
     msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-artifacts:
-  - path: Release
-    name: 'MG sandbox artifact'
+after_build:
+  - echo 'MG preparing artifacts...'
+  - zip %ARTIFACT_NAME% README.txt Release/hello
+  - appveyor PushArtifact %ARTIFACT_NAME%
+
+# artifacts:
+#   - path: Release
+#     name: 'MG sandbox artifact'
 
 deploy:
   description: 'MG sandbox deploy'
