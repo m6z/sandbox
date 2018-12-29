@@ -17,8 +17,12 @@ build_script:
   cmd: |
     msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
+artifacts:
+  - path: Release
+    name: 'MG sandbox artifact'
+
 deploy:
-  description: 'MG sandbox release'
+  description: 'MG sandbox deploy'
   provider: GitHub
   auth_token:
     secure: 2agopPPVSs1AmZL7j9rh7Sr1msI3hKGjAkuTezGgEgsCvoaWTDdpp0zUl37McW6d
