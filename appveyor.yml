@@ -17,4 +17,9 @@ build_script:
   cmd: |
     msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
+deploy:
+  description: 'MG sandbox release'
+  auth_token:
+    secure: 12345678
+
 # vim:sw=2:ts=2:et
