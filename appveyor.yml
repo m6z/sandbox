@@ -19,6 +19,7 @@ build_script:
 
 deploy:
   description: 'MG sandbox release'
+  provider: GitHub
   auth_token:
     secure: 12345678
 
