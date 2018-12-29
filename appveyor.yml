@@ -1,0 +1,20 @@
+image:
+- Ubuntu1804
+# - Visual Studio 2015
+
+configuration: Release
+
+# build:
+#   project: CMakeLists.txt
+
+build_script:
+  sh: |
+    mkdir build
+    cd build
+    cmake --version
+    cmake ..
+    cmake --build .
+  cmd: |
+    msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+# vim:sw=2:ts=2:et
