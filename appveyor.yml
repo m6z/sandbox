@@ -8,8 +8,8 @@ environment:
   mg_artifact_name: 'cdd-v{appveyor_build_version}.zip'
   mg_appveyor_build_version_1a: appveyor_build_version
   mg_appveyor_build_version_1b: APPVEYOR_BUILD_VERSION
-  mg_appveyor_build_version_2a: {appveyor_build_version}
-  mg_appveyor_build_version_2b: {APPVEYOR_BUILD_VERSION}
+  # mg_appveyor_build_version_2a: {appveyor_build_version}
+  # mg_appveyor_build_version_2b: {APPVEYOR_BUILD_VERSION}
   mg_appveyor_build_version_3a: '{appveyor_build_version}'
   mg_appveyor_build_version_3b: '{APPVEYOR_BUILD_VERSION}'
   mg_appveyor_build_version_4a: $(appveyor_build_version)
