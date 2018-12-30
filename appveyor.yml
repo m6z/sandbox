@@ -20,7 +20,7 @@ build_script:
   cmd: |
     msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-on_success:
+before_deploy:
   sh: |
     echo MG preparing artifacts...
     echo xx echo mg_artifact_name: ${mg_artifact_name}
