@@ -33,7 +33,8 @@ build_script:
     msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 # before_deploy:
-after_build:
+# after_build:
+before_package:
   sh: |
     echo MG after_build...
     echo mg_appveyor_build_version_1a: $mg_appveyor_build_version_1a
@@ -54,7 +55,7 @@ after_build:
     ls -l $PWD/$mg_artifact_name
 
 artifacts:
-  - path: cdd-v*
+  - path: build/cdd-v*
     name: cdd_artifact
 
 deploy:
