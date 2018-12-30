@@ -6,6 +6,16 @@ configuration: Release
 
 environment:
   mg_artifact_name: 'cdd-v{appveyor_build_version}.zip'
+  mg_appveyor_build_version_1a: appveyor_build_version
+  mg_appveyor_build_version_1b: APPVEYOR_BUILD_VERSION
+  mg_appveyor_build_version_2a: {appveyor_build_version}
+  mg_appveyor_build_version_2b: {APPVEYOR_BUILD_VERSION}
+  mg_appveyor_build_version_3a: '{appveyor_build_version}'
+  mg_appveyor_build_version_3b: '{APPVEYOR_BUILD_VERSION}'
+  mg_appveyor_build_version_4a: $(appveyor_build_version)
+  mg_appveyor_build_version_4b: $(APPVEYOR_BUILD_VERSION)
+  mg_appveyor_build_version_5a: '$(appveyor_build_version)'
+  mg_appveyor_build_version_5b: '$(APPVEYOR_BUILD_VERSION)'
 
 # build:
 #   project: CMakeLists.txt
@@ -23,6 +33,16 @@ build_script:
 before_deploy:
   sh: |
     echo MG preparing artifacts...
+    echo mg_appveyor_build_version_1a: $mg_appveyor_build_version_1a
+    echo mg_appveyor_build_version_1b: $mg_appveyor_build_version_1b
+    echo mg_appveyor_build_version_2a: $mg_appveyor_build_version_2a
+    echo mg_appveyor_build_version_2b: $mg_appveyor_build_version_2b
+    echo mg_appveyor_build_version_3a: $mg_appveyor_build_version_3a
+    echo mg_appveyor_build_version_3b: $mg_appveyor_build_version_3b
+    echo mg_appveyor_build_version_4a: $mg_appveyor_build_version_4a
+    echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
+    echo mg_appveyor_build_version_5a: $mg_appveyor_build_version_5a
+    echo mg_appveyor_build_version_5b: $mg_appveyor_build_version_5b
     echo xx echo mg_artifact_name: ${mg_artifact_name}
     pwd
     zip ${mg_artifact_name} ../README.txt hello
