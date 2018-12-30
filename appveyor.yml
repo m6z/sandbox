@@ -33,8 +33,8 @@ build_script:
     msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 # before_deploy:
-# after_build:
-before_package:
+after_build:
+# before_package:
   sh: |
     echo MG after_build...
     echo mg_appveyor_build_version_1a: $mg_appveyor_build_version_1a
