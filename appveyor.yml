@@ -4,6 +4,9 @@ image:
 
 configuration: Release
 
+environment:
+  artifact_name: cdd-v{appveyor_build_version}.zip
+
 # build:
 #   project: CMakeLists.txt
 
@@ -19,8 +22,10 @@ build_script:
 
 after_build:
   - echo 'MG preparing artifacts...'
-  - zip %ARTIFACT_NAME% README.txt Release/hello
-  - appveyor PushArtifact %ARTIFACT_NAME%
+  - echo "xx echo artifact_name: {artifact_name}"
+  - pwd
+  - zip "{artifact_name} ../README.txt hello"
+  - appveyor "PushArtifact {artifact_name}"
 
 # artifacts:
 #   - path: Release
