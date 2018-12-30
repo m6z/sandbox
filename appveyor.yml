@@ -5,7 +5,7 @@ image:
 configuration: Release
 
 environment:
-  mg_artifact_name: 'cdd-v{appveyor_build_version}.zip'
+  mg_artifact_name: cdd-v$(APPVEYOR_BUILD_VERSION).zip
   mg_appveyor_build_version_1a: appveyor_build_version
   mg_appveyor_build_version_1b: APPVEYOR_BUILD_VERSION
   # mg_appveyor_build_version_2a: {appveyor_build_version}
@@ -13,8 +13,10 @@ environment:
   mg_appveyor_build_version_3a: '{appveyor_build_version}'
   mg_appveyor_build_version_3b: '{APPVEYOR_BUILD_VERSION}'
   mg_appveyor_build_version_4a: $(appveyor_build_version)
+  # This works:
   mg_appveyor_build_version_4b: $(APPVEYOR_BUILD_VERSION)
   mg_appveyor_build_version_5a: '$(appveyor_build_version)'
+  # This works:
   mg_appveyor_build_version_5b: '$(APPVEYOR_BUILD_VERSION)'
 
 # build:
@@ -43,13 +45,15 @@ before_deploy:
     echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
     echo mg_appveyor_build_version_5a: $mg_appveyor_build_version_5a
     echo mg_appveyor_build_version_5b: $mg_appveyor_build_version_5b
-    echo xx echo mg_artifact_name: ${mg_artifact_name}
+    echo xx echo 1 mg_artifact_name: $mg_artifact_name
+    echo xx echo 2 mg_artifact_name: ${mg_artifact_name}
+    echo xx echo 3 mg_artifact_name: $(mg_artifact_name)
     pwd
-    zip ${mg_artifact_name} ../README.txt hello
+    zip $mg_artifact_name ../README.txt hello
 
-# artifacts:
-#   - path: $(mg_artifact_name)
-#     name: 'MG sandbox artifact'
+artifacts:
+  - path: $(mg_artifact_name)
+    name: 'MG sandbox artifact'
 
 deploy:
   description: 'MG sandbox deploy'
