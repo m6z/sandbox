@@ -47,12 +47,12 @@ before_deploy:
     echo mg_appveyor_build_version_5b: $mg_appveyor_build_version_5b
     echo xx echo 1 mg_artifact_name: $mg_artifact_name
     echo xx echo 2 mg_artifact_name: ${mg_artifact_name}
-    echo xx echo 3 mg_artifact_name: $(mg_artifact_name)
+    # echo xx echo 3 mg_artifact_name: $(mg_artifact_name)
     pwd
     zip $mg_artifact_name ../README.txt hello
 
 artifacts:
-  - path: $(mg_artifact_name)
+  - path: build/$(mg_artifact_name)
     name: 'MG sandbox artifact'
 
 deploy:
