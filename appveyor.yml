@@ -53,10 +53,11 @@ before_deploy:
 
 artifacts:
   - path: build/$(mg_artifact_name)
-    name: 'MG sandbox artifact'
+    name: cdd_artifact
 
 deploy:
   description: 'MG sandbox deploy'
+  artifact: cdd_artifact
   provider: GitHub
   auth_token:
     secure: 2agopPPVSs1AmZL7j9rh7Sr1msI3hKGjAkuTezGgEgsCvoaWTDdpp0zUl37McW6d
