@@ -5,7 +5,7 @@ image:
 configuration: Release
 
 environment:
-  artifact_name: cdd-v{appveyor_build_version}.zip
+  mg_artifact_name: cdd-v{appveyor_build_version}.zip
 
 # build:
 #   project: CMakeLists.txt
@@ -20,16 +20,16 @@ build_script:
   cmd: |
     msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-after_build:
-  - echo 'MG preparing artifacts...'
-  - echo "xx echo artifact_name: {artifact_name}"
-  - pwd
-  - zip "{artifact_name} ../README.txt hello"
-  - appveyor "PushArtifact {artifact_name}"
+on_success:
+  sh: |
+    echo MG preparing artifacts...
+    echo xx echo mg_artifact_name: {mg_artifact_name}
+    pwd
+    zip {mg_artifact_name} ../README.txt hello
 
-# artifacts:
-#   - path: Release
-#     name: 'MG sandbox artifact'
+artifacts:
+  - path: $(mg_artifact_name)
+    name: 'MG sandbox artifact'
 
 deploy:
   description: 'MG sandbox deploy'
