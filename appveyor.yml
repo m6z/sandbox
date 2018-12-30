@@ -23,9 +23,9 @@ build_script:
 on_success:
   sh: |
     echo MG preparing artifacts...
-    echo xx echo mg_artifact_name: {mg_artifact_name}
+    echo xx echo mg_artifact_name: ${mg_artifact_name}
     pwd
-    zip {mg_artifact_name} ../README.txt hello
+    zip ${mg_artifact_name} ../README.txt hello
 
 artifacts:
   - path: $(mg_artifact_name)
