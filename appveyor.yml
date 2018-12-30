@@ -53,7 +53,7 @@ before_deploy:
     ls -l $PWD/$mg_artifact_name
 
 artifacts:
-  - path: $(mg_artifact_name)
+  - path: cdd-v*
     name: cdd_artifact
 
 deploy:
