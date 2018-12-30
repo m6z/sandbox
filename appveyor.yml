@@ -32,9 +32,10 @@ build_script:
   cmd: |
     msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-before_deploy:
+# before_deploy:
+after_build:
   sh: |
-    echo MG preparing artifacts...
+    echo MG after_build...
     echo mg_appveyor_build_version_1a: $mg_appveyor_build_version_1a
     echo mg_appveyor_build_version_1b: $mg_appveyor_build_version_1b
     echo mg_appveyor_build_version_2a: $mg_appveyor_build_version_2a
