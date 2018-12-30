@@ -27,9 +27,9 @@ on_success:
     pwd
     zip ${mg_artifact_name} ../README.txt hello
 
-artifacts:
-  - path: $(mg_artifact_name)
-    name: 'MG sandbox artifact'
+# artifacts:
+#   - path: $(mg_artifact_name)
+#     name: 'MG sandbox artifact'
 
 deploy:
   description: 'MG sandbox deploy'
