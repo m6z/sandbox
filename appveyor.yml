@@ -5,7 +5,7 @@ image:
 configuration: Release
 
 environment:
-  mg_artifact_name: cdd-v{appveyor_build_version}.zip
+  mg_artifact_name: 'cdd-v{appveyor_build_version}.zip'
 
 # build:
 #   project: CMakeLists.txt
