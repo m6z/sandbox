@@ -50,9 +50,10 @@ before_deploy:
     # echo xx echo 3 mg_artifact_name: $(mg_artifact_name)
     pwd
     zip $mg_artifact_name ../README.txt hello
+    ls -l $PWD/$mg_artifact_name
 
 artifacts:
-  - path: build/$(mg_artifact_name)
+  - path: $(mg_artifact_name)
     name: cdd_artifact
 
 deploy:
