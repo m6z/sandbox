@@ -22,6 +22,45 @@ environment:
 # build:
 #   project: CMakeLists.txt
 
+before_build:
+  sh: |
+    echo APPVEYOR_API_URL: $(APPVEYOR_API_URL)
+    echo APPVEYOR_ACCOUNT_NAME: $(APPVEYOR_ACCOUNT_NAME)
+    echo APPVEYOR_PROJECT_ID: $(APPVEYOR_PROJECT_ID)
+    echo APPVEYOR_PROJECT_NAME: $(APPVEYOR_PROJECT_NAME)
+    echo APPVEYOR_PROJECT_SLUG: $(APPVEYOR_PROJECT_SLUG)
+    echo APPVEYOR_BUILD_FOLDER: $(APPVEYOR_BUILD_FOLDER)
+    echo APPVEYOR_BUILD_ID: $(APPVEYOR_BUILD_ID)
+    echo APPVEYOR_BUILD_NUMBER: $(APPVEYOR_BUILD_NUMBER)
+    echo APPVEYOR_BUILD_VERSION: $(APPVEYOR_BUILD_VERSION)
+    echo APPVEYOR_BUILD_WORKER_IMAGE: $(APPVEYOR_BUILD_WORKER_IMAGE)
+    echo APPVEYOR_PULL_REQUEST_NUMBER: $(APPVEYOR_PULL_REQUEST_NUMBER)
+    echo APPVEYOR_PULL_REQUEST_TITLE: $(APPVEYOR_PULL_REQUEST_TITLE)
+    echo APPVEYOR_PULL_REQUEST_HEAD_REPO_NAME: $(APPVEYOR_PULL_REQUEST_HEAD_REPO_NAME)
+    echo APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH: $(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)
+    echo APPVEYOR_PULL_REQUEST_HEAD_COMMIT: $(APPVEYOR_PULL_REQUEST_HEAD_COMMIT)
+    echo APPVEYOR_JOB_ID: $(APPVEYOR_JOB_ID)
+    echo APPVEYOR_JOB_NAME: $(APPVEYOR_JOB_NAME)
+    echo APPVEYOR_JOB_NUMBER: $(APPVEYOR_JOB_NUMBER)
+    echo APPVEYOR_REPO_PROVIDER: $(APPVEYOR_REPO_PROVIDER)
+    echo APPVEYOR_REPO_SCM: $(APPVEYOR_REPO_SCM)
+    echo APPVEYOR_REPO_NAME: $(APPVEYOR_REPO_NAME)
+    echo APPVEYOR_REPO_BRANCH: $(APPVEYOR_REPO_BRANCH)
+    echo APPVEYOR_REPO_TAG: $(APPVEYOR_REPO_TAG)
+    echo APPVEYOR_REPO_TAG_NAME: $(APPVEYOR_REPO_TAG_NAME)
+    echo APPVEYOR_REPO_COMMIT: $(APPVEYOR_REPO_COMMIT)
+    echo APPVEYOR_REPO_COMMIT_AUTHOR: $(APPVEYOR_REPO_COMMIT_AUTHOR)
+    echo APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL: $(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)
+    echo APPVEYOR_REPO_COMMIT_TIMESTAMP: $(APPVEYOR_REPO_COMMIT_TIMESTAMP)
+    echo APPVEYOR_REPO_COMMIT_MESSAGE: $(APPVEYOR_REPO_COMMIT_MESSAGE)
+    echo APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED: $(APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED)
+    echo APPVEYOR_SCHEDULED_BUILD: $(APPVEYOR_SCHEDULED_BUILD)
+    echo APPVEYOR_FORCED_BUILD: $(APPVEYOR_FORCED_BUILD)
+    echo APPVEYOR_RE_BUILD: $(APPVEYOR_RE_BUILD)
+    echo APPVEYOR_RE_RUN_INCOMPLETE: $(APPVEYOR_RE_RUN_INCOMPLETE)
+    echo PLATFORM: $(PLATFORM)
+    echo CONFIGURATION: $(CONFIGURATION)
+
 build_script:
   sh: |
     mkdir build
@@ -32,11 +71,7 @@ build_script:
   cmd: |
     msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-# before_deploy:
-after_build:
-# before_package:
-  sh: |
-    echo MG after_build...
+# failed experiments
     # echo mg_appveyor_build_version_1a: $mg_appveyor_build_version_1a
     # echo mg_appveyor_build_version_1b: $mg_appveyor_build_version_1b
     # echo mg_appveyor_build_version_2a: $mg_appveyor_build_version_2a
@@ -44,12 +79,16 @@ after_build:
     # echo mg_appveyor_build_version_3a: $mg_appveyor_build_version_3a
     # echo mg_appveyor_build_version_3b: $mg_appveyor_build_version_3b
     # echo mg_appveyor_build_version_4a: $mg_appveyor_build_version_4a
-    echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
     # echo mg_appveyor_build_version_5a: $mg_appveyor_build_version_5a
     # echo mg_appveyor_build_version_5b: $mg_appveyor_build_version_5b
+
+# before_deploy:
+after_build:
+# before_package:
+  sh: |
+    echo MG after_build...
+    echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
     echo xx echo 1 mg_artifact_name: $mg_artifact_name
-    # echo xx echo 2 mg_artifact_name: ${mg_artifact_name}
-    # echo xx echo 3 mg_artifact_name: $(mg_artifact_name)
     pwd
     zip $mg_artifact_name ../README.txt hello
     ls -l $PWD/$mg_artifact_name
@@ -66,6 +105,6 @@ deploy:
   auth_token:
     secure: 2agopPPVSs1AmZL7j9rh7Sr1msI3hKGjAkuTezGgEgsCvoaWTDdpp0zUl37McW6d
   on:
-    appveyor_repo_tag: true
+    APPVEYOR_REPO_TAG: true
 
 # vim:sw=2:ts=2:et
