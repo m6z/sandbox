@@ -47,16 +47,17 @@ build_script:
     # echo mg_appveyor_build_version_5a: $mg_appveyor_build_version_5a
     # echo mg_appveyor_build_version_5b: $mg_appveyor_build_version_5b
 
-# before_deploy:
-after_build:
+before_deploy:
+# after_build:
 # before_package:
-  sh: |
-    echo MG after_build...
-    echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
-    echo xx echo 1 mg_artifact_name: $mg_artifact_name
-    pwd
-    zip $mg_artifact_name ../README.txt hello
-    ls -l $PWD/$mg_artifact_name
+  - sh: |
+      echo MG before_deploy...
+      echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
+      echo xx echo 1 mg_artifact_name: $mg_artifact_name
+      pwd
+      zip $mg_artifact_name ../README.txt hello
+      ls -l $PWD/$mg_artifact_name
+  - appveyor PushArtifact $(mg_artifact_name)
 
 # artifacts:
 #   - path: build/cdd-v*
