@@ -1,0 +1,11 @@
+
+model appveyor more after rg av
+    run tests
+    use tar for linux, zip for windows
+
+how is tagging happening?
+
+need like a readme for linux txt file to package with the binary
+
+package linux as 32 bit?
+
