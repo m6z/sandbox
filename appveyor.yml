@@ -57,7 +57,7 @@ before_deploy:
       pwd
       zip $mg_artifact_name ../README.txt hello
       ls -l $PWD/$mg_artifact_name
-  - appveyor PushArtifact $(mg_artifact_name)
+  - appveyor PushArtifact $mg_artifact_name
 
 # artifacts:
 #   - path: build/cdd-v*
