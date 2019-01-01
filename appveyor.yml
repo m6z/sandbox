@@ -55,8 +55,9 @@ before_deploy:
       echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
       echo xx echo 1 mg_artifact_name: $mg_artifact_name
       pwd
-      zip $mg_artifact_name ../README.txt hello
-      ls -l $PWD/$mg_artifact_name
+      cp ../README.txt .
+      zip ../$mg_artifact_name README.txt hello
+      ls -l $PWD/../$mg_artifact_name
   - appveyor PushArtifact $mg_artifact_name
 
 # artifacts:
