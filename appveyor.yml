@@ -9,7 +9,8 @@ image:
 configuration: Release
 
 environment:
-  mg_artifact_name: cdd-v$(APPVEYOR_BUILD_VERSION).zip
+  # mg_artifact_name: cdd-v$(APPVEYOR_BUILD_VERSION).zip
+  mg_artifact_name: cdd-v$(APPVEYOR_REPO_TAG_NAME).zip
   mg_appveyor_build_version_1a: appveyor_build_version
   mg_appveyor_build_version_1b: APPVEYOR_BUILD_VERSION
   # mg_appveyor_build_version_2a: {appveyor_build_version}
@@ -28,6 +29,7 @@ environment:
 
 before_build:
   sh: |
+    echo APPVEYOR_REPO_TAG_NAME: $APPVEYOR_REPO_TAG_NAME
     echo APPVEYOR_BUILD_VERSION: $APPVEYOR_BUILD_VERSION
 
 build_script:
