@@ -71,16 +71,16 @@ before_deploy:
 #     name: cdd_artifact
 
 deploy:
-  description: 'MG sandbox deploy'
-  # artifact: /build\/.*\.zip/
-  # artifact: $mg_artifact_name
-  artifact: cdd_artifact
-  force_update: true
-  tag: $(APPVEYOR_REPO_TAG_NAME)
-  provider: GitHub
-  auth_token:
-    secure: 2agopPPVSs1AmZL7j9rh7Sr1msI3hKGjAkuTezGgEgsCvoaWTDdpp0zUl37McW6d
-#   on:
-#     APPVEYOR_REPO_TAG: true
+  - provider: GitHub
+    description: 'MG sandbox deploy'
+    # artifact: /build\/.*\.zip/
+    # artifact: $mg_artifact_name
+    artifact: cdd_artifact
+    force_update: true
+    tag: $(APPVEYOR_REPO_TAG_NAME)
+    auth_token:
+      secure: 2agopPPVSs1AmZL7j9rh7Sr1msI3hKGjAkuTezGgEgsCvoaWTDdpp0zUl37McW6d
+    on:
+      branch: master
 
 # vim:sw=2:ts=2:et
