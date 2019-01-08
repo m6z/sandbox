@@ -33,14 +33,23 @@ before_build:
     echo APPVEYOR_BUILD_VERSION: $APPVEYOR_BUILD_VERSION
 
 build_script:
-  sh: |
+  - sh: |
+    echo MG build part of build_script
     mkdir build
     cd build
     cmake --version
     cmake ..
     cmake --build .
-  cmd: |
+    echo MG before_deploy part of build_script
+    echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
+    echo xx echo 1 mg_artifact_name: $mg_artifact_name
+    pwd
+    cp ../README.txt .
+    zip $mg_artifact_name README.txt hello
+    ls -l $PWD/$mg_artifact_name
+  - cmd: |
     msbuild cd_deluxe_vs2015.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - appveyor PushArtifact $mg_artifact_name -DeploymentName cdd_artifact
 
 # failed experiments
     # echo mg_appveyor_build_version_1a: $mg_appveyor_build_version_1a
@@ -53,18 +62,18 @@ build_script:
     # echo mg_appveyor_build_version_5a: $mg_appveyor_build_version_5a
     # echo mg_appveyor_build_version_5b: $mg_appveyor_build_version_5b
 
-before_deploy:
-# after_build:
-# before_package:
-  - sh: |
-      echo MG before_deploy...
-      echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
-      echo xx echo 1 mg_artifact_name: $mg_artifact_name
-      pwd
-      cp ../README.txt .
-      zip $mg_artifact_name README.txt hello
-      ls -l $PWD/$mg_artifact_name
-  - appveyor PushArtifact $mg_artifact_name -DeploymentName cdd_artifact
+# before_deploy:
+# # after_build:
+# # before_package:
+#   - sh: |
+#       echo MG before_deploy...
+#       echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
+#       echo xx echo 1 mg_artifact_name: $mg_artifact_name
+#       pwd
+#       cp ../README.txt .
+#       zip $mg_artifact_name README.txt hello
+#       ls -l $PWD/$mg_artifact_name
+#   - appveyor PushArtifact $mg_artifact_name -DeploymentName cdd_artifact
 
 # artifacts:
 #   - path: build/$mg_artifact_name
