@@ -90,12 +90,11 @@ deploy:
     # artifact: /build\/.*\.zip/
     # artifact: $mg_artifact_name
     artifact: cdd_artifact
-    force_update: true
-    tag: $(mg_github_tag)
+    # force_update: true
+    # tag: $(mg_github_tag)
     auth_token:
       secure: 2agopPPVSs1AmZL7j9rh7Sr1msI3hKGjAkuTezGgEgsCvoaWTDdpp0zUl37McW6d
     on:
       branch: master
-
 
 # vim:sw=2:ts=2:et
