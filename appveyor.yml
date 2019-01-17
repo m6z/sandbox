@@ -10,7 +10,7 @@ configuration: Release
 
 environment:
   # mg_artifact_name: cdd-v$(APPVEYOR_BUILD_VERSION).zip
-  mg_artifact_name: cdd-v$(APPVEYOR_REPO_TAG_NAME).zip
+  # mg_artifact_name: cdd-v$(APPVEYOR_REPO_TAG_NAME).zip
   mg_appveyor_build_version_1a: appveyor_build_version
   mg_appveyor_build_version_1b: APPVEYOR_BUILD_VERSION
   # mg_appveyor_build_version_2a: {appveyor_build_version}
@@ -23,6 +23,9 @@ environment:
   mg_appveyor_build_version_5a: '$(appveyor_build_version)'
   # This works:
   mg_appveyor_build_version_5b: '$(APPVEYOR_BUILD_VERSION)'
+  #----------------------------------------------------------------------
+  mg_artifact_name: cdd-v$(APPVEYOR_BUILD_VERSION).zip
+  mg_github_tag: $(APPVEYOR_BUILD_VERSION)
 
 # build:
 #   project: CMakeLists.txt
@@ -31,6 +34,8 @@ before_build:
   sh: |
     echo APPVEYOR_REPO_TAG_NAME: $APPVEYOR_REPO_TAG_NAME
     echo APPVEYOR_BUILD_VERSION: $APPVEYOR_BUILD_VERSION
+    echo mg_artifact_name: $mg_artifact_name
+    echo mg_github_tag: $mg_github_tag
 
 build_script:
   - sh: |
@@ -41,7 +46,7 @@ build_script:
       cmake ..
       cmake --build .
       echo MG before_deploy part of build_script
-      echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
+      # echo mg_appveyor_build_version_4b: $mg_appveyor_build_version_4b
       echo xx echo 1 mg_artifact_name: $mg_artifact_name
       pwd
       cp ../README.txt .
@@ -61,7 +66,6 @@ build_script:
     # echo mg_appveyor_build_version_4a: $mg_appveyor_build_version_4a
     # echo mg_appveyor_build_version_5a: $mg_appveyor_build_version_5a
     # echo mg_appveyor_build_version_5b: $mg_appveyor_build_version_5b
-
 
 # before_deploy:
 # # after_build:
@@ -87,7 +91,7 @@ deploy:
     # artifact: $mg_artifact_name
     artifact: cdd_artifact
     force_update: true
-    tag: $(APPVEYOR_REPO_TAG_NAME)
+    tag: $(mg_github_tag)
     auth_token:
       secure: 2agopPPVSs1AmZL7j9rh7Sr1msI3hKGjAkuTezGgEgsCvoaWTDdpp0zUl37McW6d
     on:
