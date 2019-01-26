@@ -9,6 +9,7 @@ image:
 only_commits:
   message: /build/
 
+
 configuration: Release
 
 environment:
