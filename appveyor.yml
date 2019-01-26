@@ -6,6 +6,9 @@ image:
 - Ubuntu1804
 # - Visual Studio 2015
 
+only_commits:
+  message: /build/
+
 configuration: Release
 
 environment:
